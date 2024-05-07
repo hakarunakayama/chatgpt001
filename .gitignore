@@ -1,16 +1,10 @@
-.DS_Store
+# pycache
+__pycache__/
 
 # venv
 venv/
 
-# Environment
-env/
+# .vscode
+/.vscode
 
-# Django
-*.log
-*.pot
-*.pyc
-__pycache__
-local_settings.py
-db.sqlite3
-media
+
