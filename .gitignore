@@ -1,10 +1,14 @@
 # pycache
 __pycache__/
 
+# .vscode
+/.vscode
+
 # venv
 venv/
 
-# .vscode
-/.vscode
+# .env
+.env
+
 
 
