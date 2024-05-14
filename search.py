@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import openai
 import numpy as np
@@ -19,10 +20,10 @@ def create_context(question, df, max_len=1800):
     return "\n\n###\n\n".join(returns)
 
 def answer_question(question, conversation_history):
-    df = pd.read_csv('embeddings.csv')
+    df = pd.read_csv(os.path.expanduser("/home/ubuntu/prog/chatgpt001/embeddings.csv"))
     context = create_context(question, df, max_len=200)
 
-    prompt = f"あなたはとあるホテルのスタッフです。コンテキストに基づいて、お客様からの質問に丁寧に答えてください。コンテキストが質問に対して回答できない場合は「わかりません」と答えてください。\n\nコンテキスト: {context}\n\n---\n\n質問: {question}\n回答:"
+    prompt = f"あなたはpaypayの営業マンです。コンテキストに基づいて、お客様からの質問に対して、効果的な営業施策を提案してください。その際、なるべくクーポン適用期間や決済金額、還元額について説明してください。その際は具体的な数字を必ず例として挙げてください。その際に例として挙げる数字は、コンテキストに基づいたものにしてください。\n\nコンテキスト: {context}\n\n---\n\n質問: {question}\n回答:"
     conversation_history.append({"role": "user", "content": prompt})
 
     try:
