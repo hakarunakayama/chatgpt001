@@ -20,15 +20,19 @@ def create_context(question, df, max_len=1800):
     return "\n\n###\n\n".join(returns)
 
 def answer_question(question, conversation_history):
-    df = pd.read_csv(os.path.expanduser("/home/ubuntu/prog/chatgpt001/embeddings.csv"))
+    # df = pd.read_csv(os.path.expanduser("/home/ubuntu/prog/chatgpt001/embeddings.csv"))
+    # 以下は開発用ローカルディレクトリ（2024/5/17:os.pathモジュールを使ってカレントディレクトリを取得)
+    cur_dir = os.path.dirname(os.path.abspath(__file__))
+    df = pd.read_csv(os.path.join(cur_dir, 'embeddings.csv'))
     context = create_context(question, df, max_len=200)
 
-    prompt = f"あなたはpaypayの営業マンです。コンテキストに基づいて、お客様からの質問に対して、効果的な営業施策を提案してください。その際、なるべくクーポン適用期間や決済金額、還元額について説明してください。その際は具体的な数字を必ず例として挙げてください。その際に例として挙げる数字は、コンテキストに基づいたものにしてください。\n\nコンテキスト: {context}\n\n---\n\n質問: {question}\n回答:"
+    prompt = f"あなたはPayPayの営業マンです。以下のコンテキストに基づいて、お客様からの質問に対して、効果的な営業施策を提案してください。回答は3行以内で簡潔にまとめ、具体的な数字と例を含めてください。\n\nコンテキスト: {context}\n\n---\n\n質問: {question}\n回答:"
     conversation_history.append({"role": "user", "content": prompt})
 
     try:
         response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
+            model="gpt-4o",
+            # ここのconversation_historyは、セッションが続くにつれてトークン数が増えていく。
             messages=conversation_history,
             temperature=1,
         )
