@@ -10,5 +10,6 @@ venv/
 # .env
 .env
 
-
+# wsgi.py
+wsgi.py
 
