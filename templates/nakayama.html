@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>個店営業代理</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap/dist/css/bootstrap.css" rel="stylesheet">
+</head>
+<body>
+    <h1 class="m-0 p-2 text-bg-primary">個店営業代理</h1>
+    <main class="container">
+        {% if result %}
+            <h3 class="my-3">ご回答</h3>
+            <div class="border p-2 m-0">
+                <p class="m-0 p-0">{{ result }}</p>
+            </div>
+        {% else %}
+            <h3 class="my-3">質問を入力してください。</h3>
+            <div class="border p-2 m-0 my-4">
+                <p class="m-0 p-0">下のフォームにテキストを入力してください。</p>
+            </div>
+        {% endif %}
+        <form method="post">
+            <div class="my-4">
+                <textarea class="form-control" id="input_text" name="input_text" required>{{ input }}</textarea>
+            </div>
+            <div class="mb-3">
+                <button type="submit" class="btn btn-primary">送信</button>
+            </div>
+        </form>
+    </main>
+</body>
+</html>
