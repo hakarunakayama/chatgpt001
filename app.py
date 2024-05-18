@@ -1,12 +1,15 @@
 # このコードは日経ソフトウェア2024年5月号のP11のサンプルコードをベースとする
 import os
+from dotenv import load_dotenv
 import openai
 from flask import Flask, render_template, request
 from search import *
 
 # .envファイルのパス
-# strip()メソッドは、文字列から空白や改行を削除する
-env_path = ".env"
+# env_path = "/home/ubuntu/prog/chatgpt001/.env"
+# 以下は開発用のローカル環境のディレクトリ（2024/5/17:os.pathモジュールを使ってカレントディレクトリを取得)
+cur_dir = os.path.dirname(os.path.abspath(__file__))
+env_path = os.path.join(cur_dir, '.env')
 with open(env_path, "r") as file:
     for line in file:
         if line.strip() and not line.strip().startswith("#"):
